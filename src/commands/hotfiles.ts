@@ -6,6 +6,7 @@ import chalk from 'chalk'
 interface HotfilesOptions {
   top: string
   last: string
+  path?: string
 }
 
 export async function hotfilesCommand(options: HotfilesOptions): Promise<void> {
@@ -13,7 +14,7 @@ export async function hotfilesCommand(options: HotfilesOptions): Promise<void> {
   const period = options.last || '30d'
   const since = parsePeriod(period)
 
-  const analyzer = new GitAnalyzer(process.cwd())
+  const analyzer = new GitAnalyzer(options.path || process.cwd())
 
   const isValid = await analyzer.validate()
   if (!isValid) {

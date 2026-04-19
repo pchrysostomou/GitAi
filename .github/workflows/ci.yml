@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────
+  # Job 1: Test & Build
+  # Runs on every push and PR — catches broken builds early
+  # ──────────────────────────────────────────────────────────────────
+  test:
+    name: Test & Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run lint
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Build (tsup bundle)
+        run: npm run build
+
+      - name: Verify CLI entry point exists
+        run: test -f dist/index.js
+
+      - name: Smoke test — help flag
+        run: node dist/index.js --help
+
+  # ──────────────────────────────────────────────────────────────────
+  # Job 2: Integration test against a real git repo
+  # Creates a temp git repo and runs gitai against it
+  # ──────────────────────────────────────────────────────────────────
+  integration:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install & build
+        run: npm ci && npm run build
+
+      - name: Setup git identity for test repo
+        run: |
+          git config --global user.email "ci@gitai.test"
+          git config --global user.name "CI Test Bot"
+
+      - name: Create test git repository
+        run: |
+          mkdir /tmp/test-repo
+          cd /tmp/test-repo
+          git init
+          echo "# Test" > README.md
+          git add .
+          git commit -m "feat: initial setup"
+          echo "const x = 1" > index.js
+          git add .
+          git commit -m "feat: add index"
+          echo "updated" >> README.md
+          git add .
+          git commit -m "fix: update readme"
+
+      - name: Run gitai stats on test repo
+        run: node ${{ github.workspace }}/dist/index.js stats --last 7d --path /tmp/test-repo
+
+      - name: Run gitai hotfiles on test repo
+        run: node ${{ github.workspace }}/dist/index.js hotfiles --top 5 --path /tmp/test-repo
+
+      - name: Run gitai trends on test repo
+        run: node ${{ github.workspace }}/dist/index.js trends --weeks 4 --path /tmp/test-repo
+
+      - name: Run gitai analyze on test repo (no AI key = graceful)
+        run: node ${{ github.workspace }}/dist/index.js analyze --last 7d --path /tmp/test-repo

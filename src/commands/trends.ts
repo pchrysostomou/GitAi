@@ -5,6 +5,7 @@ import chalk from 'chalk'
 
 interface TrendsOptions {
   weeks: string
+  path?: string
 }
 
 export async function trendsCommand(options: TrendsOptions): Promise<void> {
@@ -15,7 +16,7 @@ export async function trendsCommand(options: TrendsOptions): Promise<void> {
     process.exit(1)
   }
 
-  const analyzer = new GitAnalyzer(process.cwd())
+  const analyzer = new GitAnalyzer(options.path || process.cwd())
 
   const isValid = await analyzer.validate()
   if (!isValid) {

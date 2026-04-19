@@ -27,6 +27,7 @@ program
   .description('Full repository analysis: stats + hotfiles + AI sprint summary')
   .option('-l, --last <period>', 'Time period to analyze (e.g. 7d, 30d, 2w, 3m)', '30d')
   .option('-a, --author <name>', 'Filter by author name')
+  .option('-p, --path <dir>', 'Path to the git repository (default: current directory)')
   .action(analyzeCommand)
 
 // ─── stats ────────────────────────────────────────────────────────────────────
@@ -36,6 +37,7 @@ program
   .description('Developer activity — commit counts and percentages per person')
   .option('-l, --last <period>', 'Time period (e.g. 7d, 30d, 2w)', '30d')
   .option('-a, --author <name>', 'Filter by author name')
+  .option('-p, --path <dir>', 'Path to the git repository (default: current directory)')
   .action(statsCommand)
 
 // ─── hotfiles ────────────────────────────────────────────────────────────────
@@ -45,6 +47,7 @@ program
   .description('Files changed most frequently (risk indicator for refactoring)')
   .option('-t, --top <n>', 'Number of files to show', '10')
   .option('-l, --last <period>', 'Time period (e.g. 7d, 30d, 2w)', '30d')
+  .option('-p, --path <dir>', 'Path to the git repository (default: current directory)')
   .action(hotfilesCommand)
 
 // ─── trends ──────────────────────────────────────────────────────────────────
@@ -53,6 +56,7 @@ program
   .command('trends')
   .description('Commit frequency per week — ASCII chart showing velocity over time')
   .option('-w, --weeks <n>', 'Number of weeks to show', '12')
+  .option('-p, --path <dir>', 'Path to the git repository (default: current directory)')
   .action(trendsCommand)
 
 // ─── summary ─────────────────────────────────────────────────────────────────

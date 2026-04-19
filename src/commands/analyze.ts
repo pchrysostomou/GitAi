@@ -7,13 +7,14 @@ import { getConfig } from '../config'
 interface AnalyzeOptions {
   last: string
   author?: string
+  path?: string
 }
 
 export async function analyzeCommand(options: AnalyzeOptions): Promise<void> {
   const period = options.last || '30d'
   const since = parsePeriod(period)
 
-  const analyzer = new GitAnalyzer(process.cwd())
+  const analyzer = new GitAnalyzer(options.path || process.cwd())
 
   // Validate we're in a git repo
   const isValid = await analyzer.validate()

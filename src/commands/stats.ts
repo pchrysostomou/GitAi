@@ -6,13 +6,14 @@ import chalk from 'chalk'
 interface StatsOptions {
   last: string
   author?: string
+  path?: string
 }
 
 export async function statsCommand(options: StatsOptions): Promise<void> {
   const period = options.last || '30d'
   const since = parsePeriod(period)
 
-  const analyzer = new GitAnalyzer(process.cwd())
+  const analyzer = new GitAnalyzer(options.path || process.cwd())
 
   const isValid = await analyzer.validate()
   if (!isValid) {
