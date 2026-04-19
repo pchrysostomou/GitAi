@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import chalk, { type ChalkInstance } from 'chalk'
 import Table from 'cli-table3'
 import type { DeveloperStat, HotFile, TrendPoint, RepoInfo } from '../types'
 
@@ -49,7 +49,7 @@ export function renderDeveloperStats(stats: DeveloperStat[]): void {
 
 // ─── Hot Files ────────────────────────────────────────────────────────────────
 
-const RISK_COLORS: Record<string, chalk.Chalk> = {
+const RISK_COLORS: Record<string, ChalkInstance> = {
   HIGH: chalk.red,
   MED: chalk.yellow,
   LOW: chalk.green,
