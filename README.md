@@ -6,7 +6,7 @@
 
 Developer stats · Hot files · Complexity trends · Sprint summaries — from the terminal.
 
-[![CI](https://github.com/YOUR_USERNAME/gitai/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/gitai/actions/workflows/ci.yml)
+[![CI](https://github.com/pchrysostomou/GitAi/actions/workflows/ci.yml/badge.svg)](https://github.com/pchrysostomou/GitAi/actions/workflows/ci.yml)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/built%20with-TypeScript-blue)](https://www.typescriptlang.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
@@ -143,7 +143,7 @@ This means the most critical logic (aggregation, sorting, period parsing) is cov
 
 ```bash
 # Clone & install
-git clone https://github.com/YOUR_USERNAME/gitai
+git clone https://github.com/pchrysostomou/GitAi
 cd gitai
 npm install
 
@@ -245,4 +245,4 @@ All other commands (`stats`, `hotfiles`, `trends`) run without any key.
 
 ## License
 
-MIT — [prodromos](https://github.com/YOUR_USERNAME)
+MIT — [pchrysostomou](https://github.com/pchrysostomou)
