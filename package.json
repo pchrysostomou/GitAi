@@ -2,7 +2,13 @@
   "name": "gitai-cli",
   "version": "0.1.0",
   "description": "AI-powered Git repository analyzer — developer stats, hotspots, complexity trends from the terminal",
-  "keywords": ["git", "ai", "cli", "developer-tools", "analytics"],
+  "keywords": [
+    "git",
+    "ai",
+    "cli",
+    "developer-tools",
+    "analytics"
+  ],
   "author": "prodromos",
   "license": "MIT",
   "bin": {
@@ -21,7 +27,7 @@
     "prepublishOnly": "npm run build && npm test"
   },
   "dependencies": {
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "cli-table3": "^0.6.3",
     "commander": "^12.1.0",
     "groq-sdk": "^0.7.0",
