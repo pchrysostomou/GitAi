@@ -31,7 +31,7 @@
     "cli-table3": "^0.6.3",
     "commander": "^12.1.0",
     "groq-sdk": "^0.7.0",
-    "ora": "^8.1.1",
+    "ora": "^5.4.1",
     "simple-git": "^3.25.0"
   },
   "devDependencies": {
