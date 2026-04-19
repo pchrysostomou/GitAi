@@ -9,7 +9,6 @@ Developer stats · Hot files · Complexity trends · Sprint summaries — from t
 [![CI](https://github.com/pchrysostomou/GitAi/actions/workflows/ci.yml/badge.svg)](https://github.com/pchrysostomou/GitAi/actions/workflows/ci.yml)
 [![Node](https://img.shields.io/badge/node-%3E%3D18-brightgreen)](https://nodejs.org)
 [![TypeScript](https://img.shields.io/badge/built%20with-TypeScript-blue)](https://www.typescriptlang.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
 </div>
 
@@ -243,6 +242,3 @@ The tool works fully without a Groq API key. When no key is set:
 
 All other commands (`stats`, `hotfiles`, `trends`) run without any key.
 
-## License
-
-MIT — [pchrysostomou](https://github.com/pchrysostomou)
